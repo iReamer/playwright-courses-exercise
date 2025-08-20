@@ -20,7 +20,7 @@ test.skip('Drag and Drop', async({page})=>{
     expect(await page.textContent('.drop-target')).toContain('Success');
 })
 
-test.only('Handyling iFrame', async ({page})=>{
+test.skip('Handling iFrame', async ({page})=>{
     await page.goto('file:///C:/Projekte/Playwright/tests/workshop_3/index.html');
     const iframeElement = page.frame({name: 'iframeName'});
     const inputSelector = '#iframe-input';
