@@ -18,7 +18,7 @@ test.skip('Interacting with Web Element on Github',async ({page})=>{
 })
 
 
-test('Using Various Locator Methods',async ({page})=>{
+test.skip('Using Various Locator Methods',async ({page})=>{
     await page.goto('https://gitlab.com');
     await page.click('#onetrust-accept-btn-handler');
     await page.getByRole('button', {name: 'Main Menu'} ).click();
