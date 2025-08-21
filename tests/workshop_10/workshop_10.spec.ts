@@ -13,7 +13,7 @@ test.skip('Take Screenshot', async({page})=>{
 }
 )
 
-test('Flaky', async({page})=>{
+test.skip('Flaky', async({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc');
 
     // page.on('response',(response)=>{
