@@ -18,7 +18,7 @@ test.skip('Automating Form Submissions @githubAction', async ({ page }) => {
     await expect(secondToDo).not.toHaveClass('completed');
 })
 
-test.only('Handling Form @githubAction', async({page})=>{
+test('Handling Form @githubAction', async({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc');
 
     await page.fill('[placeholder="What needs to be done?"]','John Doe')
