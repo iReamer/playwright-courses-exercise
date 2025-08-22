@@ -1,0 +1,9 @@
+import {test,expect} from '@playwright/test'
+
+test('Typing Characters Delayed',async ({page})=>{
+    await page.goto('https://www.flipkart.com/');
+    const searchField = page.getByPlaceholder('Search for Products, Brands and More');
+
+    await searchField.pressSequentially('Hello',{delay: 3000})
+    expect(searchField).toHaveValue('Hello');
+})
