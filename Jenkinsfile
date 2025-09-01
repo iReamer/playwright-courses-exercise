@@ -1,16 +1,15 @@
 pipeline {
-    agent any   // läuft auf jedem Jenkins-Executor
-
+    agent any
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
         stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright install --with-deps'
-                sh 'npx playwright test --project=chromium'
+                bat 'npx playwright install --with-deps'
+                bat 'npx playwright test --project=chromium'
             }
         }
     }
