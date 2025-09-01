@@ -4,8 +4,9 @@ test.use({
     actionTimeout: 1500
 })
 
-test.only('auto wait checks',async({page})=>{
+test('auto wait checks',async({page})=>{
     await page.goto('https://classic.freecrm.com/register/');
+    await expect(page.locator('input[name="agreeTerms"]')).toBeVisible();
     // page.setDefaultTimeout(15000)
     const checkboxAgree = page.locator('input[name="agreeTerms"]');
 

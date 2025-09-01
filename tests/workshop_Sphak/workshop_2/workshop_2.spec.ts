@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test'
 
-test.skip('Automation Form Submissions', async ({page})=>{
+test('Automation Form Submissions', async ({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc');
 
     const newTodo = page.getByPlaceholder('What needs to be done?');
@@ -15,13 +15,13 @@ test.skip('Automation Form Submissions', async ({page})=>{
     await firstTodo.getByRole('checkbox').check();
     await secondTodo.getByRole('checkbox').check();
 
-    await expect(secondTodo).not.toHaveClass('completed');
+    await expect(secondTodo).toHaveClass('completed');
     await page.waitForTimeout(3000);
 
     
 })
 
-test.skip('Handling Form',async ({page})=>{
+test('Handling Form',async ({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc');
     const placeholder = page.locator('[placeholder="What needs to be done?"]');
     const checkbox = page.locator('.toggle');

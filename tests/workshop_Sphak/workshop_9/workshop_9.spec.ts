@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.skip('Automating Form Submissions @githubAction', async ({ page }) => {
+test('Automating Form Submissions @githubAction', async ({ page }) => {
     await page.goto('https://demo.playwright.dev/todomvc');
 
     const newToDo = await page.getByPlaceholder('What needs to be done?');
@@ -15,7 +15,7 @@ test.skip('Automating Form Submissions @githubAction', async ({ page }) => {
     await secondToDo.getByRole('checkbox').check();
 
     await expect(firstToDo).toHaveClass('completed');
-    await expect(secondToDo).not.toHaveClass('completed');
+    await expect(secondToDo).toHaveClass('completed');
 })
 
 test('Handling Form @githubAction', async({page})=>{

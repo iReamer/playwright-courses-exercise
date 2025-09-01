@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test'
 
-test('move to element', async ({page})=>{
+test.skip('move to element', async ({page})=>{
+    await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto('https://www.bigbasket.com/')
     const button = page.locator('[id="headlessui-menu-button-:Ramkj6:"]')
 

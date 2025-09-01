@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test'
 
-test.skip('Interact with elements',async ({page})=>{
+test('Interact with elements',async ({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc')
     await page.goto('https://demo.playwright.dev/todomvc')
 
 })
 
-test.skip('Take Screenshot', async({page})=>{
+test('Take Screenshot', async({page})=>{
     await page.goto('https://demo.playwright.dev/todomvc')
     await page.screenshot({path: 'fail.png'})
     await page.goto('https://demo.playwright.dev/todomvc')

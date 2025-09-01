@@ -1,12 +1,12 @@
 import {test} from '@playwright/test';
 
-test.skip('Basic Navigation',async ({page}) =>{
+test('Basic Navigation',async ({page}) =>{
     await page.goto('https://www.gitlab.com');
     await page.waitForTimeout(3000);
     await page.reload();
 })
 
-test.skip('Interacting with Web Element on Github',async ({page})=>{
+test('Interacting with Web Element on Github',async ({page})=>{
     await page.goto('https://www.gitlab.com');
     await page.click('#onetrust-accept-btn-handler');
     await page.locator('#be-navigation-desktop').getByRole('link', {name: 'Get free trial'}).click();
@@ -18,7 +18,8 @@ test.skip('Interacting with Web Element on Github',async ({page})=>{
 })
 
 
-test.skip('Using Various Locator Methods',async ({page})=>{
+test('Using Various Locator Methods',async ({page})=>{
+    await page.setViewportSize({ width: 800, height: 800 });
     await page.goto('https://gitlab.com');
     await page.click('#onetrust-accept-btn-handler');
     await page.getByRole('button', {name: 'Main Menu'} ).click();
