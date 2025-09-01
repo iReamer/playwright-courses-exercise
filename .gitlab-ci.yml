@@ -1,0 +1,14 @@
+playwright_tests:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.47.1-jammy
+  script:
+    - npm ci
+    - npx playwright install --with-deps chromium
+    - npx playwright test --project=chromium --reporter=junit,line
+  artifacts:
+    when: always
+    reports:
+      junit: test-results/*.xml
+    paths:
+      - playwright-report
+      - test-results
