@@ -1,0 +1,75 @@
+Accessibility Violations Found: 
+Violation: color-contrast
+Description: Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds
+Impact: serious
+Node HTML: <i class="fa fa-2x fa-sign-in"> Login</i>
+Failure Summary Fix any of the following:
+  Element has insufficient color contrast of 2.83 (foreground color: #ffffff, background color: #2ba6cb, font size: 24.0pt (32px), font weight: normal). Expected contrast ratio of 3:1
+Node selector: i
+Node HTML: <a target="_blank" href="http://elementalselenium.com/">Elemental Selenium</a>
+Failure Summary Fix any of the following:
+  Element has insufficient color contrast of 2.83 (foreground color: #2ba6cb, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1
+Node selector: a[target="_blank"]
+Violation: heading-order
+Description: Ensure the order of headings is semantically correct
+Impact: moderate
+Node HTML: <h4 class="subheader">This is where you can log into the secure area. Enter <em>tomsmith</em> for the username and <em>SuperSecretPassword!</em> for the password. If the information is wrong you should see error messages.</h4>
+Failure Summary Fix any of the following:
+  Heading order invalid
+Node selector: h4
+Violation: landmark-one-main
+Description: Ensure the document has a main landmark
+Impact: moderate
+Node HTML: <html class="no-js" lang="en">
+Failure Summary Fix all of the following:
+  Document does not have a main landmark
+Node selector: html
+Violation: page-has-heading-one
+Description: Ensure that the page, or at least one of its frames contains a level-one heading
+Impact: moderate
+Node HTML: <html class="no-js" lang="en">
+Failure Summary Fix all of the following:
+  Page must have a level-one heading
+Node selector: html
+Violation: region
+Description: Ensure all page content is contained by landmarks
+Impact: moderate
+Node HTML: <a href="https://github.com/tourdedave/the-internet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/img/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: .row:nth-child(2) > a
+Node HTML: <h2>Login Page</h2>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: h2
+Node HTML: <h4 class="subheader">This is where you can log into the secure area. Enter <em>tomsmith</em> for the username and <em>SuperSecretPassword!</em> for the password. If the information is wrong you should see error messages.</h4>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: h4
+Node HTML: <div class="row">
+      <div class="large-6 small-12 columns">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+      </div>
+    </div>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: #login > .row:nth-child(1)
+Node HTML: <div class="row">
+      <div class="large-6 small-12 columns">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+      </div>
+    </div>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: #login > .row:nth-child(2)
+Node HTML: <div id="page-footer" class="row">
+      <div class="large-4 large-centered columns">
+        <hr>
+        <div style="text-align: center;">Powered by <a target="_blank" href="http://elementalselenium.com/">Elemental Selenium</a></div>
+      </div>
+    </div>
+Failure Summary Fix any of the following:
+  Some page content is not contained by landmarks
+Node selector: #page-footer
