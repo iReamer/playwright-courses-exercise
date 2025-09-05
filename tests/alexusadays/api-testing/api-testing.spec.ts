@@ -3,7 +3,10 @@ import pageTwoAllUsers from '../api-testing/test-data/reqres_users_page2_respons
 
 test.describe('API-Testing', () => {
     test('GET All Users - match saved response', async ({ request }) => {
-        const response = await request.get('https://reqres.in/api/users?page=2');
+        const response = await request.get('https://reqres.in/api/users?page=2',{
+                headers:
+                    { 'x-api-key': 'reqres-free-v1' }
+            });
 
         // verify status code
         expect(response.status()).toBe(200);
