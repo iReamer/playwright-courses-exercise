@@ -1,5 +1,5 @@
-# Creating BASE-Image Microsoft Playwright
-FROM mcr.microsoft.com/playwright:v1.47.1-jammy
+# Creating BASE-Image with latest Microsoft Playwright Image (1.54.2)
+FROM mcr.microsoft.com/playwright:v1.54.2-jammy
 
 # Copy for dependency installation
 WORKDIR /app
