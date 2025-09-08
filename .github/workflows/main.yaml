@@ -8,23 +8,36 @@ on:
   #   - cron: '* * * * *'
   #? minute - hour - day - month - day of week
 jobs:
-  test:
-    timeout-minutes: 60
+  build_dockerimage:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - name: Build Image from Dockerfile
+      run: docker build -t playwright-tests-image .
+    - name: Save Image as tar
+      run: docker save playwright-tests-image -o image.tar
+    - uses: actions/upload-artifact@v4
+      with:
+        name: image-tar
+        path: image.tar
+
+
+  test_playwright:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/playwright:v1.47.1-jammy
+    needs: build_dockerimage
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/download-artifact@v4
         with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test --project chromium
-      - uses: actions/upload-artifact@v4
+          name: image-tar
+          path: .
+      - name: Load Image
+        run: docker load -i image.tar
+      - name: Run Tests inside Container
+        run: docker run --rm -w /app -v "$PWD/playwright-report:/app/playwright-report" playwright-tests-image npx playwright test --project=chromium --reporter=line,html
+      - name: Upload Report Artifacts
         if: always()
+      - uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
