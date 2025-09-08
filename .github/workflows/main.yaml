@@ -5,39 +5,41 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch: {}
-  # schedule:
-  #   - cron: '* * * * *'
-  #? minute - hour - day - month - day of week
-jobs:
-  build_dockerimage:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Build Image from Dockerfile
-      run: docker build -t playwright-tests-image .
-    - name: Save Image as tar
-      run: docker save playwright-tests-image -o image.tar
-    - uses: actions/upload-artifact@v4
-      with:
-        name: image-tar
-        path: image.tar
 
-  test_playwright:
+jobs:
+  build:
+    name: Build Docker Image
     runs-on: ubuntu-latest
-    needs: build_dockerimage
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - name: Build image from Dockerfile
+        run: docker build -t playwright-tests-image .
+      - name: Save image as tar
+        run: docker save playwright-tests-image -o image.tar
+      - name: Upload image
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-tar
+          path: image.tar
+
+  test:
+    name: Playwright Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download image
+        uses: actions/download-artifact@v4
         with:
           name: image-tar
           path: .
-      - name: Load Image
+      - name: Load image
         run: docker load -i image.tar
-      - name: Run Tests inside Container
+      - name: Run tests inside container
         run: docker run --rm -w /app -v "$PWD/playwright-report:/app/playwright-report" playwright-tests-image npx playwright test --project=chromium --reporter=line,html
-      - name: Upload Report Artifacts
+      - name: Upload report
         if: always()
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
