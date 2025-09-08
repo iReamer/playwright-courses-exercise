@@ -24,7 +24,7 @@ test_playwright:
     - docker:dind
   script:
     - docker load -i image.tar
-    - docker run --rm -v "$PWD:/app" -w /app playwright-tests-image npx playwright test --project=chromium --reporter=line,html
+    - docker run --rm -w /app -v "$PWD/playwright-report:/app/playwright-report" playwright-tests-image npx playwright test --project=chromium --reporter=line,html
 
 
   artifacts:
