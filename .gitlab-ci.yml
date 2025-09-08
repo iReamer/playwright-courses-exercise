@@ -10,7 +10,7 @@ build_dockerimage:
     - docker:dind
   script:
     - docker build -t playwright-tests .
-    - npx playwright test --project=chromium --reporter=line,html
+    - npm ci
  
 
 
