@@ -9,8 +9,8 @@ build_dockerimage:
   services:
     - docker:dind
   script:
-    - docker build -t playwright-tests .
-    - docker save playwright-tests -o image.tar
+    - docker build -t playwright-tests-image .
+    - docker save playwright-tests-image -o image.tar
   artifacts:
     paths:
       - image.tar
@@ -24,7 +24,8 @@ test_playwright:
     - docker:dind
   script:
     - docker load -i image.tar
-    - docker run --rm playwright-tests npx playwright test --project=chromium --reporter=line,html
+    - docker run --rm -v "$PWD:/work" -w /work playwright-tests-image \
+        npx playwright test --project=chromium --reporter=line,html
   artifacts:
     when: always
     paths:
