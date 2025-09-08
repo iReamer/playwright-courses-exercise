@@ -10,7 +10,6 @@ build_dockerimage:
     - docker:dind
   script:
     - docker build -t playwright-tests .
-    - npm ci
  
 
 
