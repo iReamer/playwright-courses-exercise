@@ -1,12 +1,26 @@
-stages: [test]
+stages:
+  - build
+  - test
 
-playwright_tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.47.1-jammy
+
+build_dockerimage:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - npm ci
-    - npx playwright install --with-deps chromium
+    - docker build -t playwright-tests .
     - npx playwright test --project=chromium --reporter=line,html
+ 
+
+
+test_playwright:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker run --rm playwright-tests npx playwright test --project=chromium --reporter=line,html
   artifacts:
     when: always
     paths:
