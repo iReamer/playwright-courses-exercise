@@ -10,7 +10,11 @@ build_dockerimage:
     - docker:dind
   script:
     - docker build -t playwright-tests .
- 
+    - docker save playwright-tests -o image.tar
+  artifacts:
+    paths:
+      - image.tar
+    expire_in: 1 day
 
 
 test_playwright:
@@ -19,6 +23,7 @@ test_playwright:
   services:
     - docker:dind
   script:
+    - docker load -i image.tar
     - docker run --rm playwright-tests npx playwright test --project=chromium --reporter=line,html
   artifacts:
     when: always
