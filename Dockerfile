@@ -1,4 +1,4 @@
-# Creating BASE-Image UBUNTU.24.04 ~28MB
+# Creating BASE-Image Microsoft Playwright
 FROM mcr.microsoft.com/playwright:v1.47.1-jammy
 
 # Copy for dependency installation
@@ -11,6 +11,6 @@ RUN npm ci
 # Copy project
 COPY . .
 
-# Install Chromium Browser wiht playwright
-RUN npx playwright install chromium
+# Install Chromium Browser wiht playwright (Already in IMAGE)
+# RUN npx playwright install chromium
 
