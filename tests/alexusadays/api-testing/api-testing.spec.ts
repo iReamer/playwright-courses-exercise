@@ -1,95 +1,81 @@
-import { test, expect } from '@playwright/test'
-import pageTwoAllUsers from '../api-testing/test-data/reqres_users_page2_response.json';
+import { test, expect } from "@playwright/test";
+import pageTwoAllUsers from "../api-testing/test-data/reqres_users_page2_response.json";
 
-test.describe('API-Testing', () => {
-    test('GET All Users - match saved response', async ({ request }) => {
-        const response = await request.get('https://reqres.in/api/users?page=2',{
-                headers:
-                    { 'x-api-key': 'reqres-free-v1' }
-            });
-
-        // verify status code
-        expect(response.status()).toBe(200);
-
-        // parse response body
-        const body = await response.json();
-
-        // compare structure with saved response
-        expect(body).toEqual(pageTwoAllUsers);
+test.describe("API-Testing", () => {
+  test("GET All Users - match saved response", async ({ request }) => {
+    const response = await request.get("https://reqres.in/api/users?page=2", {
+      headers: { "x-api-key": "reqres-free-v1" },
     });
 
-    test('GET single user - check fields', async ({ request }) => {
-        const response = await request.get('https://reqres.in/api/users/2',
-            {
-                headers:
-                    { 'x-api-key': 'reqres-free-v1' }
-            });
+    // verify status code
+    expect(response.status()).toBe(200);
 
-        // verify status code
-        expect(response.status()).toBe(200);
+    // parse response body
+    const body = await response.json();
 
-        // parse response body
-        const body = await response.json();
+    // compare structure with saved response
+    expect(body).toEqual(pageTwoAllUsers);
+  });
 
-        // check fields
-        expect(body.data.id).toBe(2);
-        expect(body.data.email).toBe('janet.weaver@reqres.in');
-        expect(body.data.first_name).toBe('Janet');
+  test("GET single user - check fields", async ({ request }) => {
+    const response = await request.get("https://reqres.in/api/users/2", {
+      headers: { "x-api-key": "reqres-free-v1" },
     });
 
-    test('POST create user', async ({ request }) => {
+    // verify status code
+    expect(response.status()).toBe(200);
 
-        const newUser = { name: 'vad', job: 'QA-Engineer' }
-        const response = await request.post('https://reqres.in/api/users',
-            {
-                data: newUser, headers:
-                    { 'x-api-key': 'reqres-free-v1' }
-            });
+    // parse response body
+    const body = await response.json();
 
+    // check fields
+    expect(body.data.id).toBe(2);
+    expect(body.data.email).toBe("janet.weaver@reqres.in");
+    expect(body.data.first_name).toBe("Janet");
+  });
 
-        // verify status code
-        expect(response.status()).toBe(201);
-
-        // parse response body
-        const body = await response.json();
-
-        // check fields
-        expect(body.name).toBe('vad');
-        expect(body.job).toBe('QA-Engineer');
+  test("POST create user", async ({ request }) => {
+    const newUser = { name: "vad", job: "QA-Engineer" };
+    const response = await request.post("https://reqres.in/api/users", {
+      data: newUser,
+      headers: { "x-api-key": "reqres-free-v1" },
     });
 
-    test('PUT update user', async ({ request }) => {
+    // verify status code
+    expect(response.status()).toBe(201);
 
-        const updatedUser = { name: 'vad', job: 'QA-Engineer' }
-        const response = await request.put('https://reqres.in/api/users/2',
-            {
-                data: updatedUser, headers:
-                    { 'x-api-key': 'reqres-free-v1' }
-            });
+    // parse response body
+    const body = await response.json();
 
+    // check fields
+    expect(body.name).toBe("vad");
+    expect(body.job).toBe("QA-Engineer");
+  });
 
-        // verify status code
-        expect(response.status()).toBe(200);
-
-        // parse response body
-        const body = await response.json();
-
-        // check fields
-        expect(body.name).toBe('vad');
-        expect(body.job).toBe('QA-Engineer');
+  test("PUT update user", async ({ request }) => {
+    const updatedUser = { name: "vad", job: "QA-Engineer" };
+    const response = await request.put("https://reqres.in/api/users/2", {
+      data: updatedUser,
+      headers: { "x-api-key": "reqres-free-v1" },
     });
 
-    test('DELETE single user', async ({ request }) => {
-        const response = await request.delete('https://reqres.in/api/users/2',
-            {
-                headers:
-                    { 'x-api-key': 'reqres-free-v1' }
-            });
+    // verify status code
+    expect(response.status()).toBe(200);
 
-        // verify status code
-        expect(response.status()).toBe(204);
+    // parse response body
+    const body = await response.json();
 
+    // check fields
+    expect(body.name).toBe("vad");
+    expect(body.job).toBe("QA-Engineer");
+  });
+
+  test("DELETE single user", async ({ request }) => {
+    const response = await request.delete("https://reqres.in/api/users/2", {
+      headers: { "x-api-key": "reqres-free-v1" },
     });
 
-
-})
+    // verify status code
+    expect(response.status()).toBe(204);
+  });
+});

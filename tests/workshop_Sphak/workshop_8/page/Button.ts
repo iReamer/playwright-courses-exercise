@@ -1,13 +1,13 @@
 import { Page } from "@playwright/test";
 
-export class Button{
-    private page: Page;
+export class Button {
+  private page: Page;
 
-    constructor(page: Page){
-        this.page = page
-    }
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-    async clickButton(selector: string):  Promise<void>{
-        await this.page.click(selector);
-    }
+  async clickButton(selector: string): Promise<void> {
+    await this.page.click(selector);
+  }
 }

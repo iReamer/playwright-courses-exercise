@@ -1,13 +1,16 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test.skip('Typing Characters Delayed', async ({ page }) => {
-    await page.goto('https://www.flipkart.com/', { waitUntil: 'domcontentloaded' });
-    const searchField = page.getByPlaceholder('Search for Products, Brands and More');
-    await expect(searchField).toBeVisible();
+test.skip("Typing Characters Delayed", async ({ page }) => {
+  await page.goto("https://www.flipkart.com/", {
+    waitUntil: "domcontentloaded",
+  });
+  const searchField = page.getByPlaceholder(
+    "Search for Products, Brands and More",
+  );
+  await expect(searchField).toBeVisible();
 
+  await searchField.click();
+  await searchField.pressSequentially("Hello", { delay: 3000 });
 
-    await searchField.click();
-    await searchField.pressSequentially('Hello', { delay: 3000 })
-
-    expect(searchField).toHaveValue('Hello');
-})
+  expect(searchField).toHaveValue("Hello");
+});
