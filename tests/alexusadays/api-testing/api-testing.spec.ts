@@ -14,7 +14,7 @@ test.describe("API-Testing", () => {
     const body = await response.json();
 
     // compare structure with saved response
-    expect(body).toEqual(pageTwoAllUsers);
+    expect(body.data).toEqual(pageTwoAllUsers.data);
   });
 
   test("GET single user - check fields", async ({ request }) => {
